@@ -351,7 +351,7 @@ public class Consistency extends javax.swing.JFrame {
 
         jLabel49.setText("Average No Hit Streak: ");
 
-        errorReport1.setText("For entire career, leave years blank.");
+        errorReport1.setText("For entire career, enter \"Yr Start\" as 0.");
 
         errorReport2.setText("To calculate up to latest year, leave Yr End blank.");
 

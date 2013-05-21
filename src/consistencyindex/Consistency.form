@@ -1069,7 +1069,7 @@
             </Component>
             <Component class="javax.swing.JLabel" name="errorReport1">
               <Properties>
-                <Property name="text" type="java.lang.String" value="For entire career, leave years blank."/>
+                <Property name="text" type="java.lang.String" value="For entire career, enter &quot;Yr Start&quot; as 0."/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="errorReport2">
