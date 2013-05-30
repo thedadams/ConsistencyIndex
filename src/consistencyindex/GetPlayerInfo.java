@@ -8,6 +8,8 @@ import java.util.Scanner;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Arrays;
+import javax.swing.JOptionPane;
+import java.util.ArrayList;
 
 /**
  *
@@ -15,14 +17,13 @@ import java.util.Arrays;
  */
 public class GetPlayerInfo {
 
-    public static String[][] main(String playerFirstName, String playerLastName, String yearStart, String yearEnd) {
+    public static String[][] main(String playerFirstName, String playerLastName, String yearStart, String yearEnd, String hasPlayerID) {
 
-        String playerID = "", playerDebut = "", tmp, currentGame = "";
-        boolean didPlay = false;
-        int year, gameCounter = 0;
+        String playerID = "", playerDebut = "", tmp;
+        int gameCounter = 0;
         String[][] games = new String[3560][5];
-        int ab = 0, pa = 0, hits = 0, bb = 0, currentPA;
-        File playerList = new File("CompiledFiles/PlayerIDs.txt");
+        File playerList = new File("Players/PlayerIDsPost1915.txt");
+        String previousGame = "";
         Scanner std;
 
         try {
@@ -30,7 +31,7 @@ public class GetPlayerInfo {
             std.useDelimiter(",");
         } catch (FileNotFoundException e) {
 
-            System.out.println("File not found.");
+            System.out.println("Player list file not found.");
             return null;
 
         }
@@ -41,8 +42,42 @@ public class GetPlayerInfo {
 
                 if (std.next().equals(playerFirstName)) {
 
-                    playerID = std.next();
+                    if (hasPlayerID.equals("")) {
+
+                        playerID = std.next();
+
+                    } else {
+
+                        std.next();
+                        playerID = hasPlayerID;
+
+                    }
+
                     playerDebut = std.nextLine();
+                    if (hasPlayerID.equals("") && std.next().equals(playerLastName) && std.next().equals(playerFirstName)) {
+
+                        System.out.println(hasPlayerID);
+                        ArrayList<String> extraPlayerDebuts = new ArrayList<String>(0);
+                        ArrayList<String> extraPlayerIDs = new ArrayList<String>(0);
+                        extraPlayerIDs.add(playerID);
+                        extraPlayerDebuts.add(playerDebut.substring(1, 11));
+                        extraPlayerIDs.add(std.next());
+                        extraPlayerDebuts.add(std.nextLine().substring(1, 11));
+                        while (std.hasNextLine() && std.next().equals(playerLastName) && std.next().equals(playerFirstName)) {
+
+                            extraPlayerIDs.add(std.next());
+                            extraPlayerDebuts.add(std.nextLine().substring(1, 11));
+
+                        }
+
+                        Object[] extraPlayerDebutsArray = extraPlayerDebuts.toArray();
+                        String pickedPlayer = (String) JOptionPane.showInputDialog(null, "Multiple players found.  Pick a debut data for the player you want.", "Input", JOptionPane.INFORMATION_MESSAGE, null, extraPlayerDebutsArray, extraPlayerDebutsArray[0]);
+                        playerDebut = "," + pickedPlayer;
+                        playerID = extraPlayerIDs.get(extraPlayerDebuts.indexOf(pickedPlayer));
+                        System.out.println(playerID + " " + playerDebut);
+
+                    }
+
                     break;
 
                 }
@@ -61,13 +96,10 @@ public class GetPlayerInfo {
         }
 
         std.close();
+
         if (yearStart.equals("0") || yearStart.equals("")) {
 
-            year = Integer.parseInt(playerDebut.substring(7, 11));
-
-        } else {
-
-            year = Integer.parseInt(yearStart);
+            yearStart = playerDebut.substring(7, 11);
 
         }
 
@@ -77,111 +109,72 @@ public class GetPlayerInfo {
 
         }
 
-        File directory = new File("CompiledFiles/" + year);
+        File directory = new File("Players/" + playerFirstName + playerLastName + playerID + ".dat");
 
-        while (directory.exists()) {
+        try {
 
-            File[] files = directory.listFiles();
+            std = new Scanner(directory);
+            std.useDelimiter(",");
 
-            for (int i = 0; i < files.length; i++) {
+        } catch (FileNotFoundException e) {
 
-                try {
+            System.out.println("Player file for " + playerFirstName + " " + playerLastName + " with player ID " + playerID + " not found.");
+            return null;
 
-                    std = new Scanner(files[i]);
-                    std.useDelimiter(",");
+        }
 
-                } catch (FileNotFoundException e) {
+        while (std.hasNextLine()) {
 
-                    System.out.println("File not found.");
+            tmp = std.next();
+
+            if (Integer.parseInt(yearStart) > Integer.parseInt(tmp.substring(0, 4))) {
+
+                tmp = std.nextLine();
+                if (!std.hasNextLine()) {
+
+                    std.close();
                     return null;
 
                 }
-
-                tmp = std.next();
-                while (true) {
-
-                    if (std.next().equals("\"" + playerID + "\"")) {
-
-                        currentGame = tmp;
-                        didPlay = true;
-                        currentPA = std.nextInt();
-                        if (std.next().equals("\"F\"")) {
-                            std.nextLine();
-                            if (std.hasNextLine()) {
-
-                                tmp = std.next();
-
-                            } else {
-
-                                break;
-
-                            }
-                            continue;
-                        }
-                        pa++;
-                        if (currentPA >= 20 && currentPA != 24) {
-
-                            hits++;
-
-                        } else if (currentPA >= 14 && currentPA <= 17) {
-
-                            bb++;
-
-                        }
-
-                        if (std.nextLine().equals(",\"T\"")) {
-
-                            ab++;
-
-                        }
-
-                    } else {
-
-                        std.nextLine();
-
-                    }
-
-                    if (std.hasNextLine()) {
-
-                        tmp = std.next();
-
-                    } else {
-
-                        break;
-
-                    }
-
-                    if (didPlay && !(tmp.equals(currentGame))) {
-
-                        games[gameCounter][0] = currentGame;
-                        games[gameCounter][1] = String.valueOf(pa);
-                        games[gameCounter][2] = String.valueOf(ab);
-                        games[gameCounter][3] = String.valueOf(hits);
-                        games[gameCounter][4] = String.valueOf(bb);
-                        gameCounter++;
-                        pa = ab = hits = bb = 0;
-                        didPlay = false;
-
-                    }
-
-                }
-
-                std.close();
+                continue;
 
             }
 
-            year++;
-            if (Double.parseDouble(yearEnd) < (double) year) {
+            if (previousGame.equals(tmp)) {
+
+                tmp = std.nextLine();
+                continue;
+
+            }
+
+            if (Double.parseDouble(yearEnd) < Double.parseDouble(tmp.substring(0, 4))) {
 
                 break;
 
             }
 
-            directory = new File("CompiledFiles/" + year);
+            games[gameCounter][0] = tmp;
+            games[gameCounter][1] = std.next();
+            games[gameCounter][2] = std.next();
+            games[gameCounter][3] = std.next();
+            games[gameCounter][4] = std.nextLine().substring(1, 2);
+
+            previousGame = tmp;
+
+            gameCounter++;
 
         }
 
-        Arrays.sort(games, 0, gameCounter, new DateCompare());
+        if (games[0][0] == null) {
+
+            std.close();
+            return null;
+
+        }
+
+        Arrays.sort(games, 0, gameCounter, new TwoDArrayCompare());
+
+        std.close();
 
         return games;
 

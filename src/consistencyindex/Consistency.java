@@ -860,7 +860,7 @@ public class Consistency extends javax.swing.JFrame {
     private void goActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_goActionPerformed
         if ("".equals(firstNamePlayer1.getText().trim()) || "".equals(yearStartPlayer1.getText().trim()) || "".equals(lastNamePlayer1.getText().trim())) {
         } else {
-            player1.Calculate(firstNamePlayer1.getText(), lastNamePlayer1.getText(), yearStartPlayer1.getText(), yearEndPlayer1.getText());
+            player1.Calculate(firstNamePlayer1.getText(), lastNamePlayer1.getText(), yearStartPlayer1.getText(), yearEndPlayer1.getText(), "");
             if (player1.error) {
                 maxOnBaseStreakPlayer1.setText("");
                 maxNoBaseStreakPlayer1.setText("");
@@ -904,13 +904,13 @@ public class Consistency extends javax.swing.JFrame {
                 obpPlayer1.setText(Double.toString(player1.obp));
                 onBaseConsistencyPlayer1.setText(Double.toString(player1.onBaseCI));
                 hitConsistencyPlayer1.setText(Double.toString(player1.hitCI));
-                errorReport1.setText("");
+                errorReport1.setText("For entire career, enter \"Yr Start\" as 0.");
             }
         }
 
         if ("".equals(firstNamePlayer2.getText().trim()) || "".equals(yearStartPlayer2.getText().trim()) || "".equals(lastNamePlayer2.getText().trim())) {
         } else {
-            player1.Calculate(firstNamePlayer2.getText(), lastNamePlayer2.getText(), yearStartPlayer2.getText(), yearEndPlayer2.getText());
+            player1.Calculate(firstNamePlayer2.getText(), lastNamePlayer2.getText(), yearStartPlayer2.getText(), yearEndPlayer2.getText(), "");
             if (player1.error) {
                 maxOnBaseStreakPlayer2.setText("");
                 maxNoBaseStreakPlayer2.setText("");
@@ -954,7 +954,7 @@ public class Consistency extends javax.swing.JFrame {
                 obpPlayer2.setText(Double.toString(player1.obp));
                 onBaseConsistencyPlayer2.setText(Double.toString(player1.onBaseCI));
                 hitConsistencyPlayer2.setText(Double.toString(player1.hitCI));
-                errorReport2.setText("");
+                errorReport2.setText("To calculate up to latest year, leave Yr End blank.");
             }
         }
     }//GEN-LAST:event_goActionPerformed

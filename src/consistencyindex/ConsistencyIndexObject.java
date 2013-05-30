@@ -18,7 +18,7 @@ public class ConsistencyIndexObject {
     boolean error = true;
     double obp = 0, ba = 0;
     int totalPA = 0, totalOnBase = 0, totalAB = 0, totalHits = 0;
-    int pa, ab, hits, bb;
+    int pa = 0, ab, hits, bb;
     int onBaseStreakCount = 0, noBaseStreakCount = 0;
     int hitStreakCount = 0, noHitStreakCount = 0;
     int totalOnBaseGames = 0, totalNoBaseGames = 0;
@@ -44,16 +44,16 @@ public class ConsistencyIndexObject {
     double tmp = 0;
     String[][] player;
 
-    public void Calculate(String firstName, String lastName, String yearStart, String yearEnd) {
+    public void Calculate(String firstName, String lastName, String yearStart, String yearEnd, String hasPlayerID) {
 
         variableInit();
 
-        player = GetPlayerInfo.main(firstName.trim(), lastName.trim(), yearStart.trim(), yearEnd.trim());
-
+        player = GetPlayerInfo.main(firstName.trim(), lastName.trim(), yearStart.trim(), yearEnd.trim(), hasPlayerID);
         error = false;
         if (player == null) {
 
             error = true;
+            return;
 
         }
 
@@ -189,6 +189,13 @@ public class ConsistencyIndexObject {
             noHitStreakCount++;
 
         }
+        if (totalOnBaseGames < 2 || totalNoBaseGames < 2 || totalHitGames < 2 || totalNoHitGames < 2) {
+
+            error = true;
+            return;
+
+        }
+
         onBaseStreakMedianArray = new Integer[onBaseStreakMedian.size()];
         for (int i = 0;
                 i < onBaseStreakMedianArray.length;
@@ -207,8 +214,8 @@ public class ConsistencyIndexObject {
         }
 
         Arrays.sort(onBaseStreakMedianArray);
-
         Arrays.sort(noBaseStreakMedianArray);
+
         hitStreakMedianArray = new Integer[hitStreakMedian.size()];
         for (int i = 0;
                 i < hitStreakMedianArray.length;
@@ -312,8 +319,7 @@ public class ConsistencyIndexObject {
         }
         hitStreakStdDev = hitStreakStdDev / hitStreakCount;
         hitStreakStdDev = Math.sqrt(hitStreakStdDev);
-        onBaseStreakStdDev = onBaseStreakStdDev / onBaseStreakCount;
-        onBaseStreakStdDev = Math.sqrt(onBaseStreakStdDev);
+
         for (int i = 0;
                 i < noHitStreakMedianArray.length;
                 i++) {
@@ -323,17 +329,26 @@ public class ConsistencyIndexObject {
         }
         noHitStreakStdDev = noHitStreakStdDev / noHitStreakCount;
         noHitStreakStdDev = Math.sqrt(noHitStreakStdDev);
-        for (int i = 0;
-                i < hitStreakMedianArray.length;
-                i++) {
 
-            hitStreakStdDev = hitStreakStdDev + Math.pow(hitStreakMedianArray[i] - hitStreakAverage, 2);
+        if (onBaseStreakMedianArray.length <= 1) {
+
+            onBaseTopTenPercent = 0;
+
+        } else {
+
+            onBaseTopTenPercent = (int) Math.max(Math.floor(.1 * onBaseStreakCount), 1);
 
         }
-        hitStreakStdDev = hitStreakStdDev / hitStreakCount;
-        hitStreakStdDev = Math.sqrt(hitStreakStdDev);
-        onBaseTopTenPercent = (int) Math.floor(.1 * onBaseStreakCount);
-        noBaseTopTenPercent = (int) Math.floor(.1 * noBaseStreakCount);
+
+        if (noBaseStreakMedianArray.length <= 1) {
+
+            noBaseTopTenPercent = 0;
+
+        } else {
+
+            noBaseTopTenPercent = (int) Math.max(Math.floor(.1 * noBaseStreakCount), 1);
+
+        }
         for (int i = 0;
                 i <= onBaseTopTenPercent;
                 i++) {
@@ -346,11 +361,28 @@ public class ConsistencyIndexObject {
             tmp = tmp + noBaseStreakMedianArray[noBaseStreakMedianArray.length - i - 1];
         }
         tmp = tmp / noBaseTopTenPercent;
-        onBaseCI = onBaseCI + tmp;
+        onBaseCI = onBaseCI - tmp;
         tmp = 0;
         onBaseCI = onBaseCI + (onBaseStreakAverage - noBaseStreakAverage) + (finalOnBaseStreakMedian - finalNoBaseStreakMedian);
-        hitTopTenPercent = (int) Math.floor(.1 * hitStreakCount);
-        noHitTopTenPercent = (int) Math.floor(.1 * noHitStreakCount);
+
+        if (hitStreakMedianArray.length <= 1) {
+
+            hitTopTenPercent = 0;
+
+        } else {
+
+            hitTopTenPercent = (int) Math.max(Math.floor(.1 * hitStreakCount), 1);
+
+        }
+        if (noHitStreakMedianArray.length <= 1) {
+
+            noHitTopTenPercent = 0;
+
+        } else {
+
+            noHitTopTenPercent = (int) Math.max(Math.floor(.1 * noHitStreakCount), 1);
+
+        }
         for (int i = 0;
                 i <= hitTopTenPercent;
                 i++) {
@@ -363,7 +395,7 @@ public class ConsistencyIndexObject {
             tmp = tmp + noHitStreakMedianArray[noHitStreakMedianArray.length - i - 1];
         }
         tmp = tmp / noHitTopTenPercent;
-        onBaseCI = onBaseCI + tmp;
+        hitCI = hitCI - tmp;
         tmp = 0;
         hitCI = hitCI + (hitStreakAverage - noHitStreakAverage) + (finalHitStreakMedian - finalNoHitStreakMedian);
         onBaseCI = (onBaseCI / 3);
@@ -415,5 +447,6 @@ public class ConsistencyIndexObject {
         noBaseTopTenPercent = 0;
         tmp = 0;
         player = new String[0][0];
+
     }
 }

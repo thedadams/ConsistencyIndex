@@ -6,7 +6,21 @@ package consistencyindex;
 
 import java.util.Comparator;
 
-class DateCompare implements Comparator {
+class TwoDArrayCompare implements Comparator {
+
+    int col;
+
+    public TwoDArrayCompare() {
+
+        this(0);
+
+    }
+
+    public TwoDArrayCompare(int i) {
+
+        col = i;
+
+    }
 
     @Override
     public int compare(Object o1, Object o2) {
@@ -14,7 +28,19 @@ class DateCompare implements Comparator {
         String[] row1 = (String[]) o1;
         String[] row2 = (String[]) o2;
 
-        return row1[0].substring(4, 13).compareTo(row2[0].substring(4, 13));
+        if (Double.parseDouble(row1[col]) > Double.parseDouble(row2[col])) {
+
+            return -1;
+
+        } else if (Double.parseDouble(row1[col]) < Double.parseDouble(row2[col])) {
+
+            return 1;
+
+        } else {
+
+            return 0;
+
+        }
 
     }
 }
