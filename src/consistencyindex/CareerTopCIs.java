@@ -72,7 +72,7 @@ public class CareerTopCIs {
 
             CI.Calculate(firstName, lastName, "0", "", playerID);
 
-            if (CI.totalPA < 500 || CI.error) {
+            if (CI.totalPA < 2000 || CI.error) {
 
                 continue;
 

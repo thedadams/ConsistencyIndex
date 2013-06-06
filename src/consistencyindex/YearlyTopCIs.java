@@ -83,7 +83,7 @@ public class YearlyTopCIs {
 
                 CI.Calculate(firstName, lastName, Integer.toString(j), Integer.toString(j), playerID);
 
-                if (CI.pa < 500 || CI.error) {
+                if (CI.totalPA < 400 || CI.error) {
 
                     continue;
 
