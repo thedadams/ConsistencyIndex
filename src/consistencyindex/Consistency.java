@@ -137,7 +137,7 @@ public class Consistency extends javax.swing.JFrame {
 
         jLabel52.setText("Max Hit Streak: ");
 
-        jLabel34.setText("Last Top 10% Streak: ");
+        jLabel34.setText("Last Top 5% Streak: ");
 
         obpPlayer2.setText(" ");
 
@@ -196,9 +196,9 @@ public class Consistency extends javax.swing.JFrame {
             }
         });
 
-        jLabel27.setText("Last Top 10% Streak: ");
+        jLabel27.setText("Last Top 5% Streak: ");
 
-        jLabel5.setText("Last Top 10% Streak: ");
+        jLabel5.setText("Last Top 5% Streak: ");
 
         maxNoBaseStreakPlayer2.setText(" ");
 
@@ -210,7 +210,7 @@ public class Consistency extends javax.swing.JFrame {
 
         jLabel47.setText("Hit Consistency Index: ");
 
-        jLabel53.setText("Last Top 10% Streak: ");
+        jLabel53.setText("Last Top 5% Streak: ");
 
         averageHitStreakPlayer2.setText(" ");
 
@@ -242,11 +242,11 @@ public class Consistency extends javax.swing.JFrame {
 
         jLabel33.setText("Max No Hit Streak: ");
 
-        jLabel32.setText("Last Top 10% Streak: ");
+        jLabel32.setText("Last Top 5% Streak: ");
 
         averageNoBaseStreakPlayer2.setText(" ");
 
-        jLabel29.setText("Last Top 10% Streak: ");
+        jLabel29.setText("Last Top 5% Streak: ");
 
         jLabel13.setText("On Base Consistency Index: ");
 
@@ -310,7 +310,7 @@ public class Consistency extends javax.swing.JFrame {
 
         averageNoBaseStreakPlayer1.setText(" ");
 
-        jLabel4.setText("Last Top 10% Streak: ");
+        jLabel4.setText("Last Top 5% Streak: ");
 
         jLabel1.setText("First Name:");
 
@@ -347,7 +347,7 @@ public class Consistency extends javax.swing.JFrame {
 
         jLabel2.setText("Yr Start:");
 
-        jLabel54.setText("Last Top 10% Streak: ");
+        jLabel54.setText("Last Top 5% Streak: ");
 
         jLabel49.setText("Average No Hit Streak: ");
 
@@ -886,16 +886,16 @@ public class Consistency extends javax.swing.JFrame {
             } else {
                 maxOnBaseStreakPlayer1.setText(Integer.toString(player1.onBaseStreakMedianArray[player1.onBaseStreakMedianArray.length - 1]));
                 maxNoBaseStreakPlayer1.setText(Integer.toString(player1.noBaseStreakMedianArray[player1.noBaseStreakMedianArray.length - 1]));
-                penOnBaseStreakPlayer1.setText(Integer.toString(player1.onBaseStreakMedianArray[player1.onBaseStreakMedianArray.length - player1.onBaseTopTenPercent - 1]));
-                penNoBaseStreakPlayer1.setText(Integer.toString(player1.noBaseStreakMedianArray[player1.noBaseStreakMedianArray.length - player1.noBaseTopTenPercent - 1]));
+                penOnBaseStreakPlayer1.setText(Integer.toString(player1.onBaseStreakMedianArray[player1.onBaseStreakMedianArray.length - player1.onBaseTopFivePercent - 1]));
+                penNoBaseStreakPlayer1.setText(Integer.toString(player1.noBaseStreakMedianArray[player1.noBaseStreakMedianArray.length - player1.noBaseTopFivePercent - 1]));
                 medianOnBaseStreakPlayer1.setText(Double.toString(player1.finalOnBaseStreakMedian));
                 medianNoBaseStreakPlayer1.setText(Double.toString(player1.finalNoBaseStreakMedian));
                 averageOnBaseStreakPlayer1.setText(Double.toString(player1.onBaseStreakAverage));
                 averageNoBaseStreakPlayer1.setText(Double.toString(player1.noBaseStreakAverage));
                 maxHitStreakPlayer1.setText(Integer.toString(player1.hitStreakMedianArray[player1.hitStreakMedianArray.length - 1]));
                 maxNoHitStreakPlayer1.setText(Integer.toString(player1.noHitStreakMedianArray[player1.noHitStreakMedianArray.length - 1]));
-                penHitStreakPlayer1.setText(Integer.toString(player1.hitStreakMedianArray[player1.hitStreakMedianArray.length - player1.hitTopTenPercent - 1]));
-                penNoHitStreakPlayer1.setText(Integer.toString(player1.noHitStreakMedianArray[player1.noHitStreakMedianArray.length - player1.noHitTopTenPercent - 1]));
+                penHitStreakPlayer1.setText(Integer.toString(player1.hitStreakMedianArray[player1.hitStreakMedianArray.length - player1.hitTopFivePercent - 1]));
+                penNoHitStreakPlayer1.setText(Integer.toString(player1.noHitStreakMedianArray[player1.noHitStreakMedianArray.length - player1.noHitTopFivePercent - 1]));
                 medianHitStreakPlayer1.setText(Double.toString(player1.finalHitStreakMedian));
                 medianNoHitStreakPlayer1.setText(Double.toString(player1.finalNoHitStreakMedian));
                 averageHitStreakPlayer1.setText(Double.toString(player1.hitStreakAverage));
@@ -936,16 +936,16 @@ public class Consistency extends javax.swing.JFrame {
             } else {
                 maxOnBaseStreakPlayer2.setText(Integer.toString(player1.onBaseStreakMedianArray[player1.onBaseStreakMedianArray.length - 1]));
                 maxNoBaseStreakPlayer2.setText(Integer.toString(player1.noBaseStreakMedianArray[player1.noBaseStreakMedianArray.length - 1]));
-                penOnBaseStreakPlayer2.setText(Integer.toString(player1.onBaseStreakMedianArray[player1.onBaseStreakMedianArray.length - player1.onBaseTopTenPercent - 1]));
-                penNoBaseStreakPlayer2.setText(Integer.toString(player1.noBaseStreakMedianArray[player1.noBaseStreakMedianArray.length - player1.noBaseTopTenPercent - 1]));
+                penOnBaseStreakPlayer2.setText(Integer.toString(player1.onBaseStreakMedianArray[player1.onBaseStreakMedianArray.length - player1.onBaseTopFivePercent - 1]));
+                penNoBaseStreakPlayer2.setText(Integer.toString(player1.noBaseStreakMedianArray[player1.noBaseStreakMedianArray.length - player1.noBaseTopFivePercent - 1]));
                 medianOnBaseStreakPlayer2.setText(Double.toString(player1.finalOnBaseStreakMedian));
                 medianNoBaseStreakPlayer2.setText(Double.toString(player1.finalNoBaseStreakMedian));
                 averageOnBaseStreakPlayer2.setText(Double.toString(player1.onBaseStreakAverage));
                 averageNoBaseStreakPlayer2.setText(Double.toString(player1.noBaseStreakAverage));
                 maxHitStreakPlayer2.setText(Integer.toString(player1.hitStreakMedianArray[player1.hitStreakMedianArray.length - 1]));
                 maxNoHitStreakPlayer2.setText(Integer.toString(player1.noHitStreakMedianArray[player1.noHitStreakMedianArray.length - 1]));
-                penHitStreakPlayer2.setText(Integer.toString(player1.hitStreakMedianArray[player1.hitStreakMedianArray.length - player1.hitTopTenPercent - 1]));
-                penNoHitStreakPlayer2.setText(Integer.toString(player1.noHitStreakMedianArray[player1.noHitStreakMedianArray.length - player1.noHitTopTenPercent - 1]));
+                penHitStreakPlayer2.setText(Integer.toString(player1.hitStreakMedianArray[player1.hitStreakMedianArray.length - player1.hitTopFivePercent - 1]));
+                penNoHitStreakPlayer2.setText(Integer.toString(player1.noHitStreakMedianArray[player1.noHitStreakMedianArray.length - player1.noHitTopFivePercent - 1]));
                 medianHitStreakPlayer2.setText(Double.toString(player1.finalHitStreakMedian));
                 medianNoHitStreakPlayer2.setText(Double.toString(player1.finalNoHitStreakMedian));
                 averageHitStreakPlayer2.setText(Double.toString(player1.hitStreakAverage));

@@ -39,8 +39,8 @@ public class ConsistencyIndexObject {
     double noBaseStreakStdDev = 0, onBaseStreakStdDev = 0;
     double noHitStreakStdDev = 0, hitStreakStdDev = 0;
     double onBaseCI = 0, hitCI = 0;
-    int onBaseTopTenPercent, noBaseTopTenPercent;
-    int hitTopTenPercent, noHitTopTenPercent;
+    int onBaseTopFivePercent, noBaseTopFivePercent;
+    int hitTopFivePercent, noHitTopFivePercent;
     double tmp = 0;
     String[][] player;
 
@@ -332,69 +332,69 @@ public class ConsistencyIndexObject {
 
         if (onBaseStreakMedianArray.length <= 1) {
 
-            onBaseTopTenPercent = 0;
+            onBaseTopFivePercent = 0;
 
         } else {
 
-            onBaseTopTenPercent = (int) Math.max(Math.floor(.1 * onBaseStreakCount), 1);
+            onBaseTopFivePercent = (int) Math.max(Math.floor(.05 * onBaseStreakCount), 1);
 
         }
 
         if (noBaseStreakMedianArray.length <= 1) {
 
-            noBaseTopTenPercent = 0;
+            noBaseTopFivePercent = 0;
 
         } else {
 
-            noBaseTopTenPercent = (int) Math.max(Math.floor(.1 * noBaseStreakCount), 1);
+            noBaseTopFivePercent = (int) Math.max(Math.floor(.05 * noBaseStreakCount), 1);
 
         }
-        for (int i = 0;
-                i <= onBaseTopTenPercent;
+        for (int i = onBaseTopFivePercent + 1;
+                i <= 2 * onBaseTopFivePercent;
                 i++) {
-            onBaseCI = onBaseCI + onBaseStreakMedianArray[onBaseStreakMedianArray.length - i - 1];
+            onBaseCI = onBaseCI + onBaseStreakMedianArray[onBaseStreakMedianArray.length - i];
         }
-        onBaseCI = onBaseCI / onBaseTopTenPercent;
-        for (int i = 0;
-                i <= noBaseTopTenPercent;
+        onBaseCI = onBaseCI / onBaseTopFivePercent;
+        for (int i = noBaseTopFivePercent + 1;
+                i <= 2 * noBaseTopFivePercent;
                 i++) {
-            tmp = tmp + noBaseStreakMedianArray[noBaseStreakMedianArray.length - i - 1];
+            tmp = tmp + noBaseStreakMedianArray[noBaseStreakMedianArray.length - i];
         }
-        tmp = tmp / noBaseTopTenPercent;
+        tmp = tmp / noBaseTopFivePercent;
         onBaseCI = onBaseCI - tmp;
         tmp = 0;
         onBaseCI = onBaseCI + (onBaseStreakAverage - noBaseStreakAverage) + (finalOnBaseStreakMedian - finalNoBaseStreakMedian);
 
         if (hitStreakMedianArray.length <= 1) {
 
-            hitTopTenPercent = 0;
+            hitTopFivePercent = 0;
 
         } else {
 
-            hitTopTenPercent = (int) Math.max(Math.floor(.1 * hitStreakCount), 1);
+            hitTopFivePercent = (int) Math.max(Math.floor(.05 * hitStreakCount), 1);
 
         }
         if (noHitStreakMedianArray.length <= 1) {
 
-            noHitTopTenPercent = 0;
+            noHitTopFivePercent = 0;
 
         } else {
 
-            noHitTopTenPercent = (int) Math.max(Math.floor(.1 * noHitStreakCount), 1);
+            noHitTopFivePercent = (int) Math.max(Math.floor(.05 * noHitStreakCount), 1);
 
         }
-        for (int i = 0;
-                i <= hitTopTenPercent;
+        for (int i = hitTopFivePercent + 1;
+                i <= 2 * hitTopFivePercent;
                 i++) {
-            hitCI = hitCI + hitStreakMedianArray[hitStreakMedianArray.length - i - 1];
+            hitCI = hitCI + hitStreakMedianArray[hitStreakMedianArray.length - i];
         }
-        hitCI = hitCI / hitTopTenPercent;
-        for (int i = 0;
-                i <= noHitTopTenPercent;
+        hitCI = hitCI / hitTopFivePercent;
+        for (int i = noHitTopFivePercent + 1;
+                i <= 2 * noHitTopFivePercent;
                 i++) {
-            tmp = tmp + noHitStreakMedianArray[noHitStreakMedianArray.length - i - 1];
+            tmp = tmp + noHitStreakMedianArray[noHitStreakMedianArray.length - i];
         }
-        tmp = tmp / noHitTopTenPercent;
+        tmp = tmp / noHitTopFivePercent;
         hitCI = hitCI - tmp;
         tmp = 0;
         hitCI = hitCI + (hitStreakAverage - noHitStreakAverage) + (finalHitStreakMedian - finalNoHitStreakMedian);
@@ -441,10 +441,10 @@ public class ConsistencyIndexObject {
         hitStreakStdDev = 0;
         onBaseCI = 0;
         hitCI = 0;
-        hitTopTenPercent = 0;
-        noHitTopTenPercent = 0;
-        onBaseTopTenPercent = 0;
-        noBaseTopTenPercent = 0;
+        hitTopFivePercent = 0;
+        noHitTopFivePercent = 0;
+        onBaseTopFivePercent = 0;
+        noBaseTopFivePercent = 0;
         tmp = 0;
         player = new String[0][0];
 

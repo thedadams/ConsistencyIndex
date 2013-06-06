@@ -617,7 +617,7 @@
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel34">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Last Top 10% Streak: "/>
+                <Property name="text" type="java.lang.String" value="Last Top 5% Streak: "/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="obpPlayer2">
@@ -733,12 +733,12 @@
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel27">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Last Top 10% Streak: "/>
+                <Property name="text" type="java.lang.String" value="Last Top 5% Streak: "/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel5">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Last Top 10% Streak: "/>
+                <Property name="text" type="java.lang.String" value="Last Top 5% Streak: "/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="maxNoBaseStreakPlayer2">
@@ -768,7 +768,7 @@
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel53">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Last Top 10% Streak: "/>
+                <Property name="text" type="java.lang.String" value="Last Top 5% Streak: "/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="averageHitStreakPlayer2">
@@ -838,7 +838,7 @@
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel32">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Last Top 10% Streak: "/>
+                <Property name="text" type="java.lang.String" value="Last Top 5% Streak: "/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="averageNoBaseStreakPlayer2">
@@ -848,7 +848,7 @@
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel29">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Last Top 10% Streak: "/>
+                <Property name="text" type="java.lang.String" value="Last Top 5% Streak: "/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel13">
@@ -988,7 +988,7 @@
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel4">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Last Top 10% Streak: "/>
+                <Property name="text" type="java.lang.String" value="Last Top 5% Streak: "/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel1">
@@ -1059,7 +1059,7 @@
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel54">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Last Top 10% Streak: "/>
+                <Property name="text" type="java.lang.String" value="Last Top 5% Streak: "/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel49">

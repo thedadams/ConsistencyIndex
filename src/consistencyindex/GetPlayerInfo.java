@@ -56,7 +56,6 @@ public class GetPlayerInfo {
                     playerDebut = std.nextLine();
                     if (hasPlayerID.equals("") && std.next().equals(playerLastName) && std.next().equals(playerFirstName)) {
 
-                        System.out.println(hasPlayerID);
                         ArrayList<String> extraPlayerDebuts = new ArrayList<String>(0);
                         ArrayList<String> extraPlayerIDs = new ArrayList<String>(0);
                         extraPlayerIDs.add(playerID);
