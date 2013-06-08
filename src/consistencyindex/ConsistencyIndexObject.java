@@ -349,14 +349,14 @@ public class ConsistencyIndexObject {
             noBaseTopFivePercent = (int) Math.max(Math.floor(.05 * noBaseStreakCount), 1);
 
         }
-        for (int i = onBaseTopFivePercent + 1;
-                i <= 2 * onBaseTopFivePercent;
+        for (int i = onBaseTopFivePercent;
+                i < 2 * onBaseTopFivePercent;
                 i++) {
             onBaseCI = onBaseCI + onBaseStreakMedianArray[onBaseStreakMedianArray.length - i];
         }
         onBaseCI = onBaseCI / onBaseTopFivePercent;
-        for (int i = noBaseTopFivePercent + 1;
-                i <= 2 * noBaseTopFivePercent;
+        for (int i = noBaseTopFivePercent;
+                i < 2 * noBaseTopFivePercent;
                 i++) {
             tmp = tmp + noBaseStreakMedianArray[noBaseStreakMedianArray.length - i];
         }
@@ -383,17 +383,18 @@ public class ConsistencyIndexObject {
             noHitTopFivePercent = (int) Math.max(Math.floor(.05 * noHitStreakCount), 1);
 
         }
-        for (int i = hitTopFivePercent + 1;
-                i <= 2 * hitTopFivePercent;
+        for (int i = hitTopFivePercent;
+                i < 2 * hitTopFivePercent;
                 i++) {
             hitCI = hitCI + hitStreakMedianArray[hitStreakMedianArray.length - i];
         }
         hitCI = hitCI / hitTopFivePercent;
-        for (int i = noHitTopFivePercent + 1;
-                i <= 2 * noHitTopFivePercent;
+        for (int i = noHitTopFivePercent;
+                i < 2 * noHitTopFivePercent;
                 i++) {
             tmp = tmp + noHitStreakMedianArray[noHitStreakMedianArray.length - i];
         }
+
         tmp = tmp / noHitTopFivePercent;
         hitCI = hitCI - tmp;
         tmp = 0;
