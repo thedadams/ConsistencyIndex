@@ -81,17 +81,21 @@ public class ConsistencyIndexObject {
 
         }
 
-        if (hits == 0) {
+        if (ab != 0) {
 
-            noHit++;
-            totalNoHitGames++;
-            isHitStreaking = false;
+            if (hits == 0) {
 
-        } else {
+                noHit++;
+                totalNoHitGames++;
+                isHitStreaking = false;
 
-            didHit++;
-            totalHitGames++;
-            isHitStreaking = true;
+            } else {
+
+                didHit++;
+                totalHitGames++;
+                isHitStreaking = true;
+
+            }
 
         }
 
@@ -139,31 +143,35 @@ public class ConsistencyIndexObject {
                 totalOnBaseGames++;
             }
 
-            if (hits == 0) {
+            if (ab != 0) {
 
-                if (isHitStreaking) {
+                if (hits == 0) {
 
-                    hitStreakMedian.add(didHit);
-                    didHit = 0;
-                    hitStreakCount++;
-                    isHitStreaking = false;
+                    if (isHitStreaking) {
 
+                        hitStreakMedian.add(didHit);
+                        didHit = 0;
+                        hitStreakCount++;
+                        isHitStreaking = false;
+
+                    }
+                    noHit++;
+                    totalNoHitGames++;
+
+                } else {
+
+                    if (!isHitStreaking) {
+
+                        isHitStreaking = true;
+                        noHitStreakMedian.add(noHit);
+                        noHit = 0;
+                        noHitStreakCount++;
+
+                    }
+                    didHit++;
+                    totalHitGames++;
                 }
-                noHit++;
-                totalNoHitGames++;
 
-            } else {
-
-                if (!isHitStreaking) {
-
-                    isHitStreaking = true;
-                    noHitStreakMedian.add(noHit);
-                    noHit = 0;
-                    noHitStreakCount++;
-
-                }
-                didHit++;
-                totalHitGames++;
             }
 
         }
@@ -352,13 +360,14 @@ public class ConsistencyIndexObject {
         for (int i = onBaseTopFivePercent;
                 i < 2 * onBaseTopFivePercent;
                 i++) {
-            onBaseCI = onBaseCI + onBaseStreakMedianArray[onBaseStreakMedianArray.length - i];
+            onBaseCI = onBaseCI + onBaseStreakMedianArray[onBaseStreakMedianArray.length - i - 1];
+
         }
         onBaseCI = onBaseCI / onBaseTopFivePercent;
         for (int i = noBaseTopFivePercent;
                 i < 2 * noBaseTopFivePercent;
                 i++) {
-            tmp = tmp + noBaseStreakMedianArray[noBaseStreakMedianArray.length - i];
+            tmp = tmp + noBaseStreakMedianArray[noBaseStreakMedianArray.length - i - 1];
         }
         tmp = tmp / noBaseTopFivePercent;
         onBaseCI = onBaseCI - tmp;
@@ -386,13 +395,13 @@ public class ConsistencyIndexObject {
         for (int i = hitTopFivePercent;
                 i < 2 * hitTopFivePercent;
                 i++) {
-            hitCI = hitCI + hitStreakMedianArray[hitStreakMedianArray.length - i];
+            hitCI = hitCI + hitStreakMedianArray[hitStreakMedianArray.length - i - 1];
         }
         hitCI = hitCI / hitTopFivePercent;
         for (int i = noHitTopFivePercent;
                 i < 2 * noHitTopFivePercent;
                 i++) {
-            tmp = tmp + noHitStreakMedianArray[noHitStreakMedianArray.length - i];
+            tmp = tmp + noHitStreakMedianArray[noHitStreakMedianArray.length - i - 1];
         }
 
         tmp = tmp / noHitTopFivePercent;

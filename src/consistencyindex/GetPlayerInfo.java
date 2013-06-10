@@ -73,7 +73,6 @@ public class GetPlayerInfo {
                         String pickedPlayer = (String) JOptionPane.showInputDialog(null, "Multiple players found.  Pick a debut data for the player you want.", "Input", JOptionPane.INFORMATION_MESSAGE, null, extraPlayerDebutsArray, extraPlayerDebutsArray[0]);
                         playerDebut = "," + pickedPlayer;
                         playerID = extraPlayerIDs.get(extraPlayerDebuts.indexOf(pickedPlayer));
-                        System.out.println(playerID + " " + playerDebut);
 
                     }
 
