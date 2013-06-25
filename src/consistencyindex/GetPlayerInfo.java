@@ -70,7 +70,7 @@ public class GetPlayerInfo {
                         }
 
                         Object[] extraPlayerDebutsArray = extraPlayerDebuts.toArray();
-                        String pickedPlayer = (String) JOptionPane.showInputDialog(null, "Multiple players found.  Pick a debut data for the player you want.", "Input", JOptionPane.INFORMATION_MESSAGE, null, extraPlayerDebutsArray, extraPlayerDebutsArray[0]);
+                        String pickedPlayer = (String) JOptionPane.showInputDialog(null, "Multiple players found with name \"" + playerFirstName + " " + playerLastName + ".\"  Pick a debut data for the player you want.", "Input", JOptionPane.INFORMATION_MESSAGE, null, extraPlayerDebutsArray, extraPlayerDebutsArray[0]);
                         playerDebut = "," + pickedPlayer;
                         playerID = extraPlayerIDs.get(extraPlayerDebuts.indexOf(pickedPlayer));
 

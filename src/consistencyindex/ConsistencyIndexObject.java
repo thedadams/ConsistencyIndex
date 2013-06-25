@@ -363,15 +363,37 @@ public class ConsistencyIndexObject {
             onBaseCI = onBaseCI + onBaseStreakMedianArray[onBaseStreakMedianArray.length - i - 1];
 
         }
-        onBaseCI = onBaseCI / onBaseTopFivePercent;
+        onBaseCI = onBaseCI / (2 * onBaseTopFivePercent);
+        for (int i = 0;
+                i < onBaseTopFivePercent;
+                i++) {
+            tmp = tmp + onBaseStreakMedianArray[onBaseStreakMedianArray.length - i - 1];
+        }
+
+        tmp = tmp / (2 * onBaseTopFivePercent);
+
+        onBaseCI = onBaseCI + tmp;
+        tmp = 0;
+
         for (int i = noBaseTopFivePercent;
                 i < 2 * noBaseTopFivePercent;
                 i++) {
             tmp = tmp + noBaseStreakMedianArray[noBaseStreakMedianArray.length - i - 1];
         }
-        tmp = tmp / noBaseTopFivePercent;
+        tmp = tmp / (2 * noBaseTopFivePercent);
         onBaseCI = onBaseCI - tmp;
         tmp = 0;
+        for (int i = 0;
+                i < noBaseTopFivePercent;
+                i++) {
+            tmp = tmp + noBaseStreakMedianArray[noBaseStreakMedianArray.length - i - 1];
+        }
+
+        tmp = tmp / (2 * noBaseTopFivePercent);
+
+        onBaseCI = onBaseCI - tmp;
+        tmp = 0;
+
         onBaseCI = onBaseCI + (onBaseStreakAverage - noBaseStreakAverage) + (finalOnBaseStreakMedian - finalNoBaseStreakMedian);
 
         if (hitStreakMedianArray.length <= 1) {
@@ -397,14 +419,35 @@ public class ConsistencyIndexObject {
                 i++) {
             hitCI = hitCI + hitStreakMedianArray[hitStreakMedianArray.length - i - 1];
         }
-        hitCI = hitCI / hitTopFivePercent;
+        hitCI = hitCI / (2 * hitTopFivePercent);
+        for (int i = 0;
+                i < hitTopFivePercent;
+                i++) {
+            tmp = tmp + hitStreakMedianArray[hitStreakMedianArray.length - i - 1];
+        }
+
+        tmp = tmp / (2 * hitTopFivePercent);
+
+        hitCI = hitCI + tmp;
+        tmp = 0;
+
         for (int i = noHitTopFivePercent;
                 i < 2 * noHitTopFivePercent;
                 i++) {
             tmp = tmp + noHitStreakMedianArray[noHitStreakMedianArray.length - i - 1];
         }
 
-        tmp = tmp / noHitTopFivePercent;
+        tmp = tmp / (2 * noHitTopFivePercent);
+        hitCI = hitCI - tmp;
+        tmp = 0;
+
+        for (int i = 0;
+                i < noHitTopFivePercent;
+                i++) {
+            tmp = tmp + noHitStreakMedianArray[noHitStreakMedianArray.length - i - 1];
+        }
+
+        tmp = tmp / (2 * noHitTopFivePercent);
         hitCI = hitCI - tmp;
         tmp = 0;
         hitCI = hitCI + (hitStreakAverage - noHitStreakAverage) + (finalHitStreakMedian - finalNoHitStreakMedian);
